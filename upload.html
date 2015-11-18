@@ -1,0 +1,302 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>VAT Ebay Scraper</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		#console{
+			display: none;
+		    width: 100%;
+		    height: 100%;
+		    position: fixed;
+		    z-index: 111;
+		    background: rgba(245, 245, 245, 0.9);
+		    top: 0px;
+		    left: 0;
+		}
+		#console .title{
+		    margin-top: 50px;
+		    font-size: 32px;
+		    font-weight: bold;
+		    color: #333;
+		    text-align: center;
+		}
+		div#data{
+		    overflow: auto;
+		    width: 100%;
+		    height: 400px;
+		}
+		#excel{ font-size: 18px; }
+		body{ font-family: sans-serif; }
+		#container{
+		    text-align: center;
+		    border: 1px solid;
+		    padding: 10px;
+		}
+		#pickfiles{
+		    display: block;
+		    padding: 10px;
+		}
+		#table-data{
+			width: 100%;
+			padding: 0px !important;
+		}
+		#table-data, th, td{
+			border: 1px solid !important;
+			padding: 5px 10px !important;
+		}
+		#table-data td{
+			vertical-align: top !important;
+		}
+	</style>
+</head>
+<body>
+    <div class="container">
+    	<div class="row">
+            <div class="col-lg-12">
+				<h1>VAT Ebay Scraper</h1>
+				<ol id="filelist">
+					<li><a href="Project Description.txt" target="blank">Project Description</a>.</li>
+					<li><a href="https://vatebay-agusnurwanto.rhcloud.com/" target="blank">Demo app VAT Ebay Scraper</a>.</li>
+					<li>Save As your .xls data to .csv file. For example, you can download <a href="Fulton Excel Input.xlsx" target="blank">this file</a>.</li>
+					<li>The key must be format in the <b>first column.</b></li>
+					<li>Select your CSV file. For example, you can download <a href="Fulton.csv" target="blank">this file</a>.</li>
+					<li>Or you also can insert the key in texarea box with coma sparated (e.g 291602157755). Then click on Scrape button.</li>
+					<li>The script will be automate to scrape data by KEY from CSV file.</li>
+					<li>Please waiting when run scrape process.</li>
+				</ol>
+			</div>
+		</div>
+    	<div class="row">
+            <div class="col-lg-12">
+            	<form id="container" onsubmit="return false;">
+				    <div class="form-group col-md-5">
+				    	<a id="pickfiles" href="javascript:;" style="display:block;">[Select files]</a>
+				    </div>
+				    <div class="form-group col-md-2">
+				    	Or
+					    <div class="checkbox">
+					    	<label for="random-proxy">
+					    		<Input type="checkbox" id="random-proxy"> Random Proxy
+					    	</label>
+					    </div>
+				    </div>
+				    <div class="form-group col-md-5 form-inline">
+				    	<div class="form-group">
+				    		<textarea class="form-control" name="keys" id="texarea-keys" cols="30" rows="3" placeholder="Insert key in this area"></textarea>
+				    	</div>
+				    	<button onclick="setKey(); return false;" type="button" class="btn btn-primary">Scrape</button>
+				    </div>
+				    <div style="clear:both"></div>
+				</form>
+			</div>
+		</div>
+    	<div class="row">
+            <div class="col-lg-12">
+				<h2>Changelog</h2>
+				<ul>
+					<li>
+						Update 18 Nov 2015 : 
+						<ul>
+							<li>Create default demo.</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="console"></div>
+		<div id="footer">Develop by <a href="http://agus.pondokprogrammer.com" target="blank">Agus Nurwanto</a>.</div>
+		<div id="currentData"></div>
+	</div>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+	<!-- production -->
+	<script type="text/javascript" src="plupload/js/plupload.full.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		window.allData = {};
+		allData.vat = {};
+
+		// Initialize the widget when the DOM is ready
+		var uploader = new plupload.Uploader({
+			runtimes : 'html5,flash,silverlight,html4',
+			browse_button : 'pickfiles',
+			container: document.getElementById('container'),
+			url : 'readCsv.php',
+			filters : {
+				max_file_size : '10mb',
+				mime_types: [
+					{title : "CSV Files", extensions : "csv"}
+				]
+			},
+			flash_swf_url : 'plupload/js/Moxie.swf',
+			silverlight_xap_url : 'plupload/js/Moxie.xap',
+			multipart: true,
+			multipart_params: {
+				action: "read_csv"
+			},
+			file_data_name: "async-upload",
+			init : {
+				FilesAdded: function(up, files) {
+					$('#console').show();
+					$('#console').html('<div class="title">Reading the CSV File.</div>');
+					if($('#random-proxy:checked').val()){
+						uploader.setOption("url","readCsv.php?radomProxy=true");
+					}else{
+						uploader.setOption("url","readCsv.php");
+					}
+		        	up.refresh();
+		        	up.start();
+				},
+				FileUploaded: function(up, file, response) {
+					var res = JSON.parse(response.response);
+					if(res.error!="1"){
+						window.allKey = res.msg;
+						startScrape();
+					}else{
+						alert(res.msg);
+						console.log(res);
+					}
+				}
+			},
+		});
+		uploader.init();
+
+		function setKey(){
+			$('#console').show();
+			var keys = $("#texarea-keys").val();
+			if(!keys)
+				return alert("Empty keys!");
+			window.allKey = String(keys).split(",").map(function(b, i){
+				return [b.trim()];
+			});
+      		return startScrape();
+		}
+
+		function startScrape(){
+			$('#console').html('<div class="title">Total key is: '+allKey.length+' <br>Start to Scrape.<br>Please Waiting!</div><div id="data"><table id="table-data"><thead></thead><tbody></tbody></table></div>');
+			var i = j = 0;
+			allKey.reduce(function(sequence, key) {
+			  	return sequence.then(function() {
+					if((i+1)%2==0){
+						$('#console .title').html('Total key is: '+allKey.length+' <br>Proses '+i+' Scrape. <a href="excel.php" target="blank" id="excel">Show on excel!</a><br>Please Waiting!');
+					}
+				    return getPage(key[0]);
+			  	})
+			  	.then(function(res){
+			  		return new Promise(function(resolve, reject){
+				  		parsingData($.parseHTML(res.msg["page"].replace(/<img[^>]*>/g,"")), res.key)
+				  			.then(function(data){
+				  				allData.vat[j] = data;
+				  				if(i==0){
+				  					addDataToTable(i, true);
+				  					addDataToSession(i, true);
+				  				}else{
+				  					addDataToTable(i);
+				  					addDataToSession(i);
+				  				}
+						  		j++;
+						  		i++;
+						  		if(i>=(allKey.length-1)){
+							    	return resolve(finishScrape());
+						  		}
+						  		return resolve(res);
+				  			})
+				  	});
+			  	})
+			  	.catch(function(err){
+			  		console.log(err.stack);
+			  		i++;
+			  		return Promise.reject(err);
+			  	})
+			}, Promise.resolve());
+		}
+
+		function getPage(key){
+			return new Promise(function(resolve, reject){
+				$.ajax({
+				    url:"scrape.php",  
+				    type: "POST",
+    				data: "getDetail=true&key="+key,
+    				dataType: "JSON",
+				    success:function(data) {
+				    	if(data.error!="1"){
+				    		data.key = key;
+				      		return resolve(data);
+				      	}else{
+				      		return reject(data);
+				      	}
+				    }
+			  	});
+			})
+			.catch(function(err){
+				console.log(err.stack);
+				return Promise.reject();
+			});
+		}
+
+		function parsingData(html, key){
+			$('#currentData').html(html);
+			return new Promise(function(resolve, reject){
+				var trDetail = $('#currentData .webGridDetailSW tbody tr');
+				var vat = $(".bsi-trd span").text();
+				var data = {
+					"Item Number": key,
+					"VAT Number": vat
+				};
+				return resolve(data);
+			})
+			.catch(function(err){
+				console.log(err.stack);
+				return Promise.reject();
+			});
+		}
+
+		function finishScrape(){
+			$('#console .title').html('Process 100%. Finish :)<br><a href="excel.php" target="blank" id="excel">Show on excel!</a>');
+		}
+
+		function addDataToTable(j, cekHeader){
+			if(cekHeader){
+				var header = "<tr>";
+				header += "<th>No</th>";
+				for(var i in allData.vat[j]){ 
+					header += "<th>"+i+"</th>";
+				};
+				header += "</tr>";
+				$('#data table thead').html(header);
+			}
+			var content = "<tr>";
+			content += "<td>"+(j+1)+"</td>";
+			for(var i in allData.vat[j]){ 
+				content += "<td>"+allData.vat[j][i]+"</td>";
+			};
+			$('#data table tbody').append(content);
+		}
+
+		function addDataToSession(j, firstScrape){
+			var param = {};
+			param.vat = allData.vat[j];
+			param.setSession = true;
+			param.key = j;
+			if(firstScrape){
+				param.firstScrape = true;
+			}
+			$.ajax({
+			    url:"excel.php",  
+			    type: "POST",
+			    contentType: 'application/json',
+				data: JSON.stringify(param),
+				dataType: "JSON",
+			    success:function(data) {
+			    	return data;
+			    }
+		  	});
+		}
+	</script>
+</body>
+</html>

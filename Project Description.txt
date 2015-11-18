@@ -1,0 +1,18 @@
+https://www.freelancer.com/projects/php/Ebay-scraping-script-for-VAT/
+
+Project Description:
+
+We need to scrape the VAT number from ebay listings that we have purchased in the past, by providing the ebay item number.
+e.g input file contains one column of Ebay Item Numbers:
+291602157755
+
+Script checks ebay UK and finds "VAT number: UK 860487994" in the listing. Then puts item number and VAT number in two columns in output file. e.g:
+291602157755 UK 860487994
+
+To be run manually, happy for web script or exe to run on windows.
+
+If you can complete this then please place a bid.
+Thanks
+
+Skills required
+eBay, Excel, PHP, Script Install, Web Scraping
