@@ -19,129 +19,29 @@
     </section>
 
     <section class="main-content">
-      <p>&lt;!DOCTYPE html&gt;
-</p>
+      <h1>
+<a id="vat-ebay-scraper" class="anchor" href="#vat-ebay-scraper" aria-hidden="true"><span class="octicon octicon-link"></span></a>VAT Ebay Scraper</h1>
 
-<p></p>
+<ul>
+<li>Project Description look at <a href="https://vatebay-agusnurwanto.rhcloud.com/Project%20Description.txt">https://vatebay-agusnurwanto.rhcloud.com/Project%20Description.txt</a>.</li>
+<li>Demo app VAT Ebay Scraper look at <a href="https://vatebay-agusnurwanto.rhcloud.com/">https://vatebay-agusnurwanto.rhcloud.com/</a>.</li>
+<li>Save As your .xls data to .csv file. For example, you can download this file.</li>
+<li>The key must be format in the first column.</li>
+<li>Select your CSV file. For example, you can download this file.</li>
+<li>Or you also can insert the key in texarea box with coma sparated (e.g 291602157755). Then click on Scrape button.</li>
+<li>The script will be automate to scrape data by KEY from CSV file.</li>
+<li>Please waiting when run scrape process.</li>
+</ul>
 
-<pre><code>&lt;meta charset="utf-8"&gt;
-&lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
-&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
-&lt;meta name="description" content=""&gt;
-&lt;meta name="author" content=""&gt;
+<h2>
+<a id="changelog" class="anchor" href="#changelog" aria-hidden="true"><span class="octicon octicon-link"></span></a>Changelog</h2>
 
-&lt;title&gt;VAT Ebay Scraper&lt;/title&gt;
+<h4>
+<a id="update-18-nov-2015-" class="anchor" href="#update-18-nov-2015-" aria-hidden="true"><span class="octicon octicon-link"></span></a>Update 18 Nov 2015 :</h4>
 
-&lt;!-- Bootstrap Core CSS --&gt;
-&lt;link href="https://vatebay-agusnurwanto.rhcloud.com/css/bootstrap.min.css" rel="stylesheet"&gt;
-
-&lt;!-- Custom CSS --&gt;
-&lt;link href="https://vatebay-agusnurwanto.rhcloud.com/css/landing-page.css" rel="stylesheet"&gt;
-
-&lt;!-- Custom Fonts --&gt;
-&lt;link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"&gt;
-&lt;link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"&gt;
-
-&lt;!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --&gt;
-&lt;!-- WARNING: Respond.js doesn't work if you view the page via file:// --&gt;
-&lt;!--[if lt IE 9]&gt;
-    &lt;script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"&gt;&lt;/script&gt;
-    &lt;script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"&gt;&lt;/script&gt;
-&lt;![endif]--&gt;
-&lt;style&gt;
-    .intro-header {
-        background: url("http://pondokprogrammer.com/wp-content/uploads/2015/11/web-scrape.jpg") no-repeat center center;
-    }
-&lt;/style&gt;
-</code></pre>
-
-<p></p>
-
-<p></p>
-
-<pre><code>&lt;!-- Navigation --&gt;
-&lt;nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation"&gt;
-    &lt;div class="container topnav"&gt;
-        &lt;!-- Brand and toggle get grouped for better mobile display --&gt;
-        &lt;div class="navbar-header"&gt;
-            &lt;button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"&gt;
-                &lt;span class="sr-only"&gt;Toggle navigation&lt;/span&gt;
-                &lt;span class="icon-bar"&gt;&lt;/span&gt;
-                &lt;span class="icon-bar"&gt;&lt;/span&gt;
-                &lt;span class="icon-bar"&gt;&lt;/span&gt;
-            &lt;/button&gt;
-            &lt;a class="navbar-brand topnav" href="https://vatebay-agusnurwanto.rhcloud.com/"&gt;Fulton Scraper&lt;/a&gt;
-        &lt;/div&gt;
-        &lt;!-- Collect the nav links, forms, and other content for toggling --&gt;
-        &lt;div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"&gt;
-            &lt;ul class="nav navbar-nav navbar-right"&gt;
-                &lt;li&gt;
-                    &lt;a href="Project Description.txt"&gt;Project Description&lt;/a&gt;
-                &lt;/li&gt;
-                &lt;li&gt;
-                    &lt;a href="upload.html"&gt;Application&lt;/a&gt;
-                &lt;/li&gt;
-            &lt;/ul&gt;
-        &lt;/div&gt;
-        &lt;!-- /.navbar-collapse --&gt;
-    &lt;/div&gt;
-    &lt;!-- /.container --&gt;
-&lt;/nav&gt;
-
-
-&lt;!-- Header --&gt;
-&lt;a name="about"&gt;&lt;/a&gt;
-&lt;div class="intro-header"&gt;
-    &lt;div class="container"&gt;
-
-        &lt;div class="row"&gt;
-            &lt;div class="col-lg-12"&gt;
-                &lt;div class="intro-message"&gt;
-                    &lt;h1&gt;Web Scraping&lt;/h1&gt;
-                    &lt;h3&gt;&lt;a href="upload.html"&gt;VAT Ebay Scraper&lt;/a&gt;&lt;/h3&gt;
-                    &lt;hr class="intro-divider"&gt;
-                    &lt;ul class="list-inline intro-social-buttons"&gt;
-                        &lt;li&gt;
-                            &lt;a href="https://agus.pondokprogrammer.com/" class="btn btn-default btn-lg"&gt;&lt;i class="fa fa-globe fa-fw"&gt;&lt;/i&gt; &lt;span class="network-name"&gt;My Site&lt;/span&gt;&lt;/a&gt;
-                        &lt;/li&gt;
-                        &lt;li&gt;
-                            &lt;a href="https://github.com/agusnurwanto/" class="btn btn-default btn-lg"&gt;&lt;i class="fa fa-github fa-fw"&gt;&lt;/i&gt; &lt;span class="network-name"&gt;Github&lt;/span&gt;&lt;/a&gt;
-                        &lt;/li&gt;
-                        &lt;li&gt;
-                            &lt;a href="https://www.linkedin.com/in/agusnurwanto" class="btn btn-default btn-lg"&gt;&lt;i class="fa fa-linkedin fa-fw"&gt;&lt;/i&gt; &lt;span class="network-name"&gt;Linkedin&lt;/span&gt;&lt;/a&gt;
-                        &lt;/li&gt;
-                    &lt;/ul&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-
-    &lt;/div&gt;
-    &lt;!-- /.container --&gt;
-
-&lt;/div&gt;
-&lt;!-- /.intro-header --&gt;
-
-&lt;!-- Footer --&gt;
-&lt;footer&gt;
-    &lt;div class="container"&gt;
-        &lt;div class="row"&gt;
-            &lt;div class="col-lg-12"&gt;
-                &lt;p class="copyright text-muted small"&gt;Copyright &amp;copy; &lt;a href="http://pondokprogrammer.com/" target="blank"&gt;Pondok Programmer&lt;/a&gt; 2015. All Rights Reserved&lt;/p&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/footer&gt;
-
-&lt;!-- jQuery --&gt;
-&lt;script src="https://vatebay-agusnurwanto.rhcloud.com/js/jquery.js"&gt;&lt;/script&gt;
-
-&lt;!-- Bootstrap Core JavaScript --&gt;
-&lt;script src="https://vatebay-agusnurwanto.rhcloud.com/js/bootstrap.min.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p></p>
-
-<p></p>
+<ul>
+<li>Create default demo.</li>
+</ul>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/agusnurwanto/vat-ebay-web-scrapping">Vat-ebay-web-scrapping</a> is maintained by <a href="https://github.com/agusnurwanto">agusnurwanto</a>.</span>
