@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>VAT Ebay Scraper</title>
+    <title>Launching seluruh Website Desa kabupaten Magetan</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -29,86 +29,55 @@
     <![endif]-->
     <style>
         .intro-header {
-            background: url("http://pondokprogrammer.com/wp-content/uploads/2015/11/web-scrape.jpg") no-repeat center center;
+            /*background: url("http://pondokprogrammer.com/wp-content/uploads/2015/11/web-scrape.jpg") no-repeat center center;*/
+        }
+        #Mp3Me {
+            display: none;
+        }
+        #launching {
+            font-size: 65px;
+            font-weight: bold;
+            padding: 15px 45px;
         }
     </style>
 
 </head>
 
 <body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
-        <div class="container topnav">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand topnav" href="https://vatebay-agusnurwanto.rhcloud.com/">Fulton Scraper</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="Project Description.txt">Project Description</a>
-                    </li>
-                    <li>
-                        <a href="upload.html">Application</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-
     <!-- Header -->
-    <a name="about"></a>
     <div class="intro-header">
         <div class="container">
 
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
-                        <h1>Web Scraping</h1>
-                        <h3><a href="upload.html">VAT Ebay Scraper</a></h3>
-                        <hr class="intro-divider">
-                        <ul class="list-inline intro-social-buttons">
-                            <li>
-                                <a href="https://agus.pondokprogrammer.com/" class="btn btn-default btn-lg"><i class="fa fa-globe fa-fw"></i> <span class="network-name">My Site</span></a>
-                            </li>
-                            <li>
-                                <a href="https://github.com/agusnurwanto/" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/in/agusnurwanto" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
-                            </li>
-                        </ul>
+                    <audio id="Mp3Me" autoplay autobuffer controls>
+                        <source src="#">
+                    </audio>
+
+                    <script type="text/javascript">
+                    function GuitarTrack(_that){
+                        var Mp3Me= document.getElementById('Mp3Me');
+                        Mp3Me.children[0].src = "media/sirine launching web desa.ogg";
+                        Mp3Me.load();
+                        setTimeout(function(){
+                            window.location.href = "http://magetan-desa.info/";
+                        }, 17000);
+                        jQuery(_that).button('loading');
+                    }
+                    </script>
+                        <h1><button id="launching" class="btn btn-danger" onclick="GuitarTrack(this);"  data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> waiting...">Launch</button></h1>
+                        <h3>Launching seluruh Website Desa kabupaten Magetan</h3>
                     </div>
                 </div>
             </div>
-
         </div>
         <!-- /.container -->
-
     </div>
-    <!-- /.intro-header -->
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p class="copyright text-muted small">Copyright &copy; <a href="http://pondokprogrammer.com/" target="blank">Pondok Programmer</a> 2015. All Rights Reserved</p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div style="position: fixed; z-index: -99; width: 100%; height: 100%; top:0;">
+        <iframe frameborder="0" height="100%" width="100%" src="https://youtube.com/embed/MSNCOkBC0a0?autoplay=1&controls=0&showinfo=0&autohide=1&loop=1&playlist=MSNCOkBC0a0&disablekb=1">
+      </iframe>
+    </div>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
